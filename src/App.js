@@ -13,10 +13,10 @@ function App() {
     <div>
       <ReactMapGL {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/papuanengineer/ck06hm0ms2dzj1dpb3wt7nhpl"
+        mapStyle="mapbox://styles/papuanengineer/ck06ijf1p2eu81dpbjqe547el"
         onViewportChange={(viewport)=>{setViewport(viewport);}}
       >
-        markers here
+        Select a province
       </ReactMapGL>
     </div>
   );
