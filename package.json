@@ -7,6 +7,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.0.10",
+    "react-mdl": "^1.11.0",
     "react-scripts": "3.1.1"
   },
   "scripts": {
