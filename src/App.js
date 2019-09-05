@@ -13,6 +13,7 @@ function App() {
     <div>
       <ReactMapGL {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/papuanengineer/ck06ijf1p2eu81dpbjqe547el"
         onViewportChange={(viewport)=>{setViewport(viewport);}}
       >
         Select a province
