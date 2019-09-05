@@ -26,9 +26,13 @@
   height: 300px;
   position: relative;
 }
-/* .container {
-  height: 100%;
-} */
+img {
+  border-radius: 8px;
+}
+.container {
+  height: flex;
+  position: relative;
+} 
 .container {
   display: flex;
   flex-direction: column;

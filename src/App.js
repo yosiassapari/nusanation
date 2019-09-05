@@ -1,18 +1,60 @@
 import React, {useState} from 'react';
-import {Layout, Header, Navigation, Drawer, Content, Textfield, Footer, FooterSection, FooterLinkList} from 'react-mdl';
+import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl';
 import ReactMapGL from "react-map-gl";
 
 function Headers() {
   return (
-    <Header title="Title">
-      <Textfield
-        value=""
-        onChange={() => {}}
-        label="Search"
-        expandable
-        expandableIcon="search"
-        />
+    <Header title="Nusa Nation" scroll>
+      <Navigation>
+        <a href="/">Projects</a>
+        <a href="/">About</a>
+        <a href="/">Sign In</a>
+        <a href="/">Join US</a>
+      </Navigation>
     </Header>
+  );
+}
+
+function Drawers(){
+  return(
+    <Drawer title="Provinces">
+      <Navigation>
+        <a href="/">Aceh</a>
+        <a href="/">North Sumatra</a>
+        <a href="/">West Sumatra</a>
+        <a href="/">Riau</a>
+        <a href="/">Riau Archipelago/Islands</a>
+        <a href="/">Jambi</a>
+        <a href="/">Bengkulu</a>
+        <a href="/">South Sumatra</a>
+        <a href="/">Bangka Belitung Islands</a>
+        <a href="/">Lampung</a>
+        <a href="/">Banten</a>
+        <a href="/">Jakarta</a>
+        <a href="/">West Java</a>
+        <a href="/">Central Java</a>
+        <a href="/">Yogyakarta</a>
+        <a href="/">East Java</a>
+        <a href="/">Bali</a>
+        <a href="/">West Nusa Tenggara</a>
+        <a href="/">East Nusa Tenggara</a>
+        <a href="/">West Kalimantan</a>
+        <a href="/">Central Kalimantan</a>
+        <a href="/">South Kalimantan</a>
+        <a href="/">East Kalimantan</a>
+        <a href="/">North Kalimantan</a>
+        <a href="/">North Sulawesi</a>
+        <a href="/">Gorontalo</a>
+        <a href="/">Central Sulawesi</a>
+        <a href="/">West Sulawesi</a>
+        <a href="/">South Sulawesi</a>
+        <a href="/">Southeast Sulawesi</a>
+        <a href="/">North Maluku</a>
+        <a href="/">Maluku (The Moluccas)</a>
+        <a href="/">West Papua</a>
+        <a href="/">Papua</a>
+      </Navigation>
+    </Drawer>
   );
 }
 
@@ -29,48 +71,26 @@ function Body() {
       <Content>
         <ReactMapGL {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle="mapbox://styles/papuanengineer/ck06ijf1p2eu81dpbjqe547el"
+          mapStyle="mapbox://styles/papuanengineer/ck06hm0ms2dzj1dpb3wt7nhpl"
           onViewportChange={(viewport)=>{setViewport(viewport);}}>
-          Select a province
         </ReactMapGL>
       </Content>
     </div>
   );
 }
-function Footers() {
-  return (
-    <div className="foot">
-      <Footer size="mini">
-        <FooterSection type="left" logo="Title">
-            <FooterLinkList>
-                <a href="/">Help</a>
-                <a href="/">Privacy & Terms</a>
-            </FooterLinkList>
-        </FooterSection>
-        </Footer>
-    </div>
-  );
-}
+
 
 
 function App() {
   return (
     <div className="container">
-      <div style={{height: '650px', position: 'relative'}}>
-        <Layout fixedHeader fixedDrawer>
+      <div className="demo-big-content">
+    <Layout>
             <Headers />
-            <Drawer title="Title">
-                <Navigation>
-                    <a href="/">Link</a>
-                    <a href="/">Link</a>
-                    <a href="/">Link</a>
-                    <a href="/">Link</a>
-                </Navigation>
-            </Drawer>
+            <Drawers/>
             <Body />
         </Layout>
       </div>
-      <Footers/>
     </div>
   );
 }
