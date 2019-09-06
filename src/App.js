@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl';
-import ReactMapGL, {Marker} from "react-map-gl";
+import ReactMapGL, {Marker, Popup} from "react-map-gl";
 import * as parkData from "./data/provinsi.json"
 
 function Headers() {
@@ -63,17 +63,31 @@ function Body() {
   const [viewport, setViewport] = useState({
     latitude: -1.394998,
     longitude: 120.753769,
-    width: "100vw", //view width
-    height: "100vh", //view height
+    width: "108vw", //view width
+    height: "108vh", //view height
     zoom: 4.5
-  })
+  });
+  const [selectedPark, setSelectedPark] = useState(null);
+
+  useEffect(()=>{
+    const listener = e => {
+      if(e.key === "Escape"){
+        setSelectedPark(null);
+      }
+    };
+    window.addEventListener("keydown",listener);
+    return()=>{
+      window.removeEventListener("keydown",listener);
+    }
+  },[]);
+
   return (
     <div className="body">
       <Content>
         <ReactMapGL {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle="mapbox://styles/papuanengineer/ck06hm0ms2dzj1dpb3wt7nhpl"
-          onViewportChange={(viewport)=>{setViewport(viewport);}}
+          mapStyle="mapbox://styles/papuanengineer/ck06ijf1p2eu81dpbjqe547el"
+          onViewportChange={(viewport)=>{setViewport(viewport);}}          
         >
           {parkData.features.map(provinces=> (
             <Marker 
@@ -81,18 +95,34 @@ function Body() {
               latitude={provinces.geometry.latitude}
               longitude={provinces.geometry.longitude}
             >
-              <button class="marker-btn">
-                <img src="/location.jpg" alt="Location Icon"/>
-              </button>          
+              <button class="marker-btn" onClick={(e)=>{
+                e.preventDefault();
+                setSelectedPark(provinces);
+              }}>
+                <img src="/location.png" alt="Location Icon"/>
+              </button>
             </Marker>
           ))}
+
+          {selectedPark ? (
+            <Popup 
+              latitude={selectedPark.geometry.latitude} 
+              longitude={selectedPark.geometry.longitude}
+              onClose={()=>{
+                setSelectedPark(null);
+              }}
+            >
+              <div>
+                <h5>{selectedPark.properties.nama}</h5>
+                <p>Disini ada sekian banyak tempat</p>
+              </div>
+            </Popup>
+          ) : null}
         </ReactMapGL>
       </Content>
     </div>
   );
 }
-
-
 
 function App() {
   return (
