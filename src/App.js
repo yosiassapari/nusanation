@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Layout, Header, Navigation, Drawer, Content} from 'react-mdl';
-import ReactMapGL from "react-map-gl";
+import ReactMapGL, {Marker} from "react-map-gl";
+import * as parkData from "./data/provinsi.json"
 
 function Headers() {
   return (
@@ -60,8 +61,8 @@ function Drawers(){
 
 function Body() {
   const [viewport, setViewport] = useState({
-    latitude: -2.483383,
-    longitude: 117.890285,
+    latitude: -1.394998,
+    longitude: 120.753769,
     width: "100vw", //view width
     height: "100vh", //view height
     zoom: 4.5
@@ -72,7 +73,19 @@ function Body() {
         <ReactMapGL {...viewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle="mapbox://styles/papuanengineer/ck06hm0ms2dzj1dpb3wt7nhpl"
-          onViewportChange={(viewport)=>{setViewport(viewport);}}>
+          onViewportChange={(viewport)=>{setViewport(viewport);}}
+        >
+          {parkData.features.map(provinces=> (
+            <Marker 
+              key={provinces.properties.id} 
+              latitude={provinces.geometry.latitude}
+              longitude={provinces.geometry.longitude}
+            >
+              <button class="marker-btn">
+                <img src="/location.jpg" alt="Location Icon"/>
+              </button>          
+            </Marker>
+          ))}
         </ReactMapGL>
       </Content>
     </div>
@@ -85,10 +98,10 @@ function App() {
   return (
     <div className="container">
       <div className="demo-big-content">
-    <Layout>
-            <Headers />
-            <Drawers/>
-            <Body />
+        <Layout>
+          <Headers />
+          <Drawers/>
+          <Body />
         </Layout>
       </div>
     </div>
